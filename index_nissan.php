@@ -33,23 +33,24 @@ foreach($html->find('ad') as $element){
 
         if ($photo_id != "<photos>"){
             //var_dump(htmlspecialchars($photo_id)); echo "<br>";
+/*
             echo "./tmp_nis/".$ref."/".$photo_id; echo "<br>";
-            
             $fh = fopen("./tmp_nis/".$ref."/".$photo_id.".jpeg", "w");
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://imgnis.imaweb.net/uv/image.jpg?id=".$photo_id);
             curl_setopt($ch, CURLOPT_FILE, $fh);
             curl_exec($ch);
             curl_close($ch);
-            
+*/            
         }
 
-        /*
+        
         echo '<a href="https://imgnis.imaweb.net/uv/image.jpg?id='.$photo_id.'" target="_blank">
             <img width="80" height="80" border="0" align="center"  src="https://imgnis.imaweb.net/uv/image.jpg?id='.$photo_id.'"/>
         </a>';
-        */
+        
     }
+
     echo "<br><br>";
     //echo htmlspecialchars($element) . '-------------<br><br>';
 }
