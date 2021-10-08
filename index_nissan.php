@@ -11,11 +11,7 @@ curl_close($ch);
 
 foreach($html->find('ad') as $element){
     preg_match('/<reference>(.*?)<\/reference>/s', $element, $reference);
-    $r1 = explode("<reference>",$reference[0]);
-    $r2 = explode("</reference>",$r1[1]);
-    $r3 = explode("nis_134_",$r2[0]);
-    $ref = $r3[1];
-    echo "Ref: ".$ref."<br>";
+    echo "Ref: ".$reference[0]."<br>";
     preg_match('/<model>(.*?)<\/model>/s', $element, $model);
     echo "Modelo: ".$model[0]."<br>";
     preg_match('/<version>(.*?)<\/version>/s', $element, $version);
@@ -26,29 +22,12 @@ foreach($html->find('ad') as $element){
     //var_dump(htmlspecialchars($photos[0]));
     $photo = explode("<photo>https://imgnis.imaweb.net/uv/image.jpg?id=",$photos[0]);
 
-    mkdir('./tmp/'.$ref, 0755, true);
     foreach ($photo as $value) {
         //"https://imgnis.imaweb.net/uv/image.jpg?id="
         $photo_id = explode("&amp;brandDealer=nis_134</photo>",$value)[0];
-
-        if ($photo_id != "<photos>"){
-            //var_dump(htmlspecialchars($photo_id)); echo "<br>";
-            echo ".tmp/".$ref."/".$photo_id; echo "<br>";
-            
-            $fh = fopen("./tmp/".$ref."/".$photo_id.".jpeg", "w");
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, "https://imgnis.imaweb.net/uv/image.jpg?id=".$photo_id);
-            curl_setopt($ch, CURLOPT_FILE, $fh);
-            curl_exec($ch);
-            curl_close($ch);
-            
-        }
-
-        /*
         echo '<a href="https://imgnis.imaweb.net/uv/image.jpg?id='.$photo_id.'" target="_blank">
             <img width="80" height="80" border="0" align="center"  src="https://imgnis.imaweb.net/uv/image.jpg?id='.$photo_id.'"/>
         </a>';
-        */
     }
     echo "<br><br>";
     //echo htmlspecialchars($element) . '-------------<br><br>';
